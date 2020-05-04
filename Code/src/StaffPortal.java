@@ -1,3 +1,4 @@
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,10 +8,10 @@ import java.sql.SQLException;
 import java.io.*;
 import org.sqlite.SQLiteConfig;
 
-public class CustomerPortal {
+public class StaffPortal {
 	
 	
-	public static void CustomerSignIn() throws IOException {
+	public static void StaffSignIn() throws IOException {
 		
 		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessab.db";  
 		   // Namnet på den driver som används av java för att prata med SQLite
@@ -38,35 +39,31 @@ public class CustomerPortal {
 	    
 		
 	      boolean signIn = true;
-	      String user = "";
+	      
 	      
 	      
 	      while(signIn) {
 	    	  
-	    	  System.out.println("Type in username"); 
-	          String userName = reader.readLine();
+	    	  System.out.println("Enter employee ID: "); 
+	          int userName = Integer.parseInt(reader.readLine());
 	          
-	          System.out.println("Type in password"); 
+	          System.out.println("Enter password"); 
 	          String password = reader.readLine();
 			
 
 	          try {
 	          
-	    	  String credentials = "Select * from Customer WHERE Email = ? and Password = ?";
+	    	  String credentials = "Select * from Staff WHERE employeeID = ? and password = ?";
 
 	    	  pstmt = conn.prepareStatement(credentials);                
 	          
-	          pstmt.setString(1, userName);
+	          pstmt.setInt(1, userName);
 	          pstmt.setString(2, password);
 	          
 	          ResultSet rs = pstmt.executeQuery();
-	          ResultSetMetaData rsmd = rs.getMetaData();
+	         
 	          
-	          
-	          
-	          user = rs.getString(2);
-	       
-	          
+
 	             
 	            	  if (rs.next() == false) {
 	           
@@ -92,24 +89,28 @@ public class CustomerPortal {
 	      
 	      System.out.println("Sign in sucessfull");
 	      
-	      System.out.println("Welcome " + user);
 	      
-	      String customerMenu = "";
 	      
-	      while(!customerMenu.contentEquals("Q")) {
+	      String staffMenu = "";
+	      
+	      while(!staffMenu.contentEquals("Q")) {
 	    	  
 	          System.out.println(""); 
 	          System.out.println("Customer menu - använd kortkommandon för respektive meny");
 	          System.out.println();
 	          
-	          System.out.println("B - Book a class");
+	          System.out.println("R - Register new customer");
 	          System.out.println("Q - Sign out");
 	          
 	          
-	          customerMenu = reader.readLine();
-	          customerMenu = customerMenu.toUpperCase();  
+	          staffMenu = reader.readLine();
+	          staffMenu = staffMenu.toUpperCase();  
 	          
-	          switch(customerMenu) {
+	          switch(staffMenu) {
+	          
+	          case "R":
+	        	  
+	        	  RegisterCustomer.register();
 	          
 	          case "Q":
 	        	  System.out.println("Signing out");
@@ -133,3 +134,4 @@ public class CustomerPortal {
 	
 
 }
+

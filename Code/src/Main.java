@@ -1,10 +1,6 @@
 
-import java.util.Date;
+
 import java.io.*;
-import java.sql.*;
-import org.sqlite.SQLiteConfig;
-
-
 
 
 public class Main {
@@ -50,16 +46,26 @@ public class Main {
        
          switch(menu) {
          
-         	case "C":
+         case "R":
+        	 RegisterCustomer.register();
+        	 break;
+         
+         case "C":
 
-	          CustomerPortal.CustomerSign();
+	          CustomerPortal.CustomerSignIn();
 
 	          break;
-            case "Q":
+	          
+	     case "S":
+	    	 
+	    	 StaffPortal.StaffSignIn();
+	    	 
+	    	 break;
+         case "Q":
             	System.out.println("Exiting program");
             	System.exit(0);
 	          
-	          default:
+	     default:
 	        	  System.out.println("Fel");
 	        	  break;
          }
