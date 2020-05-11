@@ -12,24 +12,24 @@ public class CustomerPortal {
 	
 	public static void CustomerSignIn() throws IOException {
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessab.db";  
-		   // Namnet på den driver som används av java för att prata med SQLite
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		   
 		   final String DRIVER = "org.sqlite.JDBC";   
 
 		
-		 Connection conn = null;
+		  Connection conn = null;
 	      PreparedStatement pstmt = null;
 	    
 		
 	      try {
 	          Class.forName(DRIVER);
 	          SQLiteConfig config = new SQLiteConfig();  
-	          config.enforceForeignKeys(true); // Denna kodrad ser till att sätta databasen i ett läge där den ger felmeddelande ifall man bryter mot någon främmande-nyckel-regel
+	          config.enforceForeignKeys(true); 
 	          conn = DriverManager.getConnection(DB_URL,config.toProperties());  
 	       
 	          
 	       } catch (Exception e) {
-	          // Om java-progammet inte lyckas koppla upp sig mot databasen (t ex om fel sökväg eller om driver inte hittas) så kommer ett felmeddelande skrivas ut
+	          
 	          System.out.println( e.toString() );
 	          System.exit(0);
 	       }
@@ -39,6 +39,7 @@ public class CustomerPortal {
 		
 	      boolean signIn = true;
 	      String user = "";
+	      int pNr = 0;
 	      
 	      
 	      while(signIn) {
@@ -52,7 +53,7 @@ public class CustomerPortal {
 
 	          try {
 	          
-	    	  String credentials = "Select * from Customer WHERE Email = ? and Password = ?";
+	    	  String credentials = "Select * from Members WHERE Email = ? and Password = ?";
 
 	    	  pstmt = conn.prepareStatement(credentials);                
 	          
@@ -60,11 +61,12 @@ public class CustomerPortal {
 	          pstmt.setString(2, password);
 	          
 	          ResultSet rs = pstmt.executeQuery();
-	          ResultSetMetaData rsmd = rs.getMetaData();
+	          
 	          
 	          
 	          
 	          user = rs.getString(2);
+	          pNr = rs.getInt(1);
 	       
 	          
 	             
@@ -94,24 +96,38 @@ public class CustomerPortal {
 	      
 	      System.out.println("Welcome " + user);
 	      
-	      String customerMenu = "";
+	      int customerMenu = 1000;
 	      
-	      while(!customerMenu.contentEquals("Q")) {
+	      while (customerMenu != 0) {
 	    	  
 	          System.out.println(""); 
-	          System.out.println("Customer menu - använd kortkommandon för respektive meny");
+	          System.out.println("Customer menu");
 	          System.out.println();
 	          
-	          System.out.println("B - Book a class");
-	          System.out.println("Q - Sign out");
+	          System.out.println("1 - Book a class"); //Done
+	          System.out.println("2 - Delete a Booking");//Done
+	          System.out.println("3 - My Bookings");//Done
+	          System.out.println("4 - Change Contact information");
+	          System.out.println("0 - Sign out");//Done
 	          
 	          
-	          customerMenu = reader.readLine();
-	          customerMenu = customerMenu.toUpperCase();  
+	          customerMenu = Integer.parseInt(reader.readLine());
+	           
 	          
 	          switch(customerMenu) {
 	          
-	          case "Q":
+	          case 1:
+	        	  ClassPtEnrollmentSubsystem.BookClass(pNr);
+	        	  break;
+	          
+	        
+	          case 3:
+	        	  ClassPtEnrollmentSubsystem.Boookings(pNr);
+	        	  break;
+	          case 2:
+	        	  ClassPtEnrollmentSubsystem.DeleteBooking(pNr);
+	        	  break;
+	          case 0:
 	        	  System.out.println("Signing out");
 	          break;
 	        	 

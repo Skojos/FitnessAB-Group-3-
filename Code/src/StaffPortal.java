@@ -3,7 +3,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.io.*;
 import org.sqlite.SQLiteConfig;
@@ -13,12 +12,12 @@ public class StaffPortal {
 	
 	public static void StaffSignIn() throws IOException {
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessab.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
 		   // Namnet på den driver som används av java för att prata med SQLite
 		   final String DRIVER = "org.sqlite.JDBC";   
 
 		
-		 Connection conn = null;
+		  Connection conn = null;
 	      PreparedStatement pstmt = null;
 	    
 		
@@ -67,14 +66,16 @@ public class StaffPortal {
 	             
 	            	  if (rs.next() == false) {
 	           
-	            		  break;
+	            	return;
+	            		  
 	            	  } else {
 	            		  
-	            		  signIn = false;
+	            		 signIn = false;
+	            		 
 	            	  }
 	            	  
-	           conn.close();
-
+	           
+	            	conn.close();
 	             
 	          } catch(SQLException e){
 	        	  
@@ -91,30 +92,93 @@ public class StaffPortal {
 	      
 	      
 	      
-	      String staffMenu = "";
+	      int staffMenu = 1000;
 	      
-	      while(!staffMenu.contentEquals("Q")) {
+	      while(staffMenu != 0) {
 	    	  
 	          System.out.println(""); 
-	          System.out.println("Customer menu - använd kortkommandon för respektive meny");
+	          System.out.println("Staff menu");
 	          System.out.println();
+	          System.out.println();
+	          System.out.println("Membership management subsystem");
+	          System.out.println();//_______________________________
+	          System.out.println("1 - Register new customer");
+	          System.out.println("2 - Update customer information");
+	          System.out.println("3 - Pause membership");
+	          System.out.println("4 - Activate membership");
+	          System.out.println("5 - Cancel a membership");
+	          System.out.println();
+	          System.out.println();
+	          System.out.println("Equipment management subsystem");
+	          System.out.println();
+	          System.out.println("6 - Add branch"); //Done
+	          System.out.println("7 - Add equiptment"); //Done
+	          System.out.println("8 - Delete equipment");//Done
+	          System.out.println();
+	          System.out.println();
+	          System.out.println("Class Subsystem");
+	          System.out.println();
+	          System.out.println("9  - Add new class");//Done
+	          System.out.println("10 - Add class to schedule");//Done
+	          System.out.println("11 - Delete class from schedule");//Done
+	          System.out.println("12 - Add new instructor");
+	         
+	         
+	          System.out.println("");
+	          System.out.println("");
 	          
-	          System.out.println("R - Register new customer");
-	          System.out.println("Q - Sign out");
 	          
 	          
-	          staffMenu = reader.readLine();
-	          staffMenu = staffMenu.toUpperCase();  
+	          System.out.println("0 - Sign out");
+	          
+	          
+	          staffMenu = Integer.parseInt(reader.readLine());
+	          
 	          
 	          switch(staffMenu) {
 	          
-	          case "R":
+	          case 1:
 	        	  
-	        	  RegisterCustomer.register();
+	        	  MembershipSubSystem.register();
+	        	  
+	        	  break;
 	          
-	          case "Q":
+	          case 0:
 	        	  System.out.println("Signing out");
 	          break;
+	          
+	          case 6:
+	        	  GymEquipmentSubsystem.AddBranch();
+	        	  break;
+	        
+  
+	        	  
+	          case 7:
+	        	  GymEquipmentSubsystem.AddEquipment();
+	        	  break;
+	        	  
+	          case 8:
+	        	  GymEquipmentSubsystem.DeleteEquipment();
+	        	  break;
+	        	  
+	          case 9:
+	        	  ClassPtEnrollmentSubsystem.AddClass();
+	        	  break;
+
+	          case 11:
+	        	  
+	        	  ClassPtEnrollmentSubsystem.RemoveClassSchedule();
+	        	  break;
+	          
+	          case 12:
+	        	  
+	        	  ClassPtEnrollmentSubsystem.AddInstructor();
+	        	  break;
+	        
+	          case 10:
+	        	  
+	        	  ClassPtEnrollmentSubsystem.ClassSchedule();
+	        	  break;
 	        	 
 	          default:
 	        	  

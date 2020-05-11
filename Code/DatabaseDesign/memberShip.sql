@@ -1,35 +1,32 @@
-CREATE TABLE Customer (
-    pNr INTEGER,
+CREATE TABLE Members (
+    Pnr INTEGER,
     Fname text,
     Lname text,
-    StreetAddress text,
-    ZipCode INTEGER,
-    District text,
+    PhoneNumber INTEGER,
     Email text,
     Password text,
-    PhoneNumber INTEGER,
-    PaymentMethod INTEGER,
-    PRIMARY KEY (pNr),
-    FOREIGN KEY (PaymentMethod)
-        REFERENCES PaymentMethod (ID)
+    PaymentID INTEGER,
+    PRIMARY KEY (Pnr),
+    FOREIGN KEY (PaymentID)
+        REFERENCES PaymentMethod (PaymentID)
 );
 
 
 
 CREATE TABLE CreditCardInformation (
-    ID INTEGER,
+    Pnr INTEGER,
     Fname text,
     LName text,
     cardNumber INTEGER,
     validDate text,
     cvcCode INTEGER,
-    PRIMARY KEY (ID),
-    FOREIGN KEY (ID)
-        REFERENCES customer (pNr)
+    PRIMARY KEY (Pnr),
+    FOREIGN KEY (Pnr)
+        REFERENCES Customers (Pnr)
 );
 
 CREATE TABLE PaymentMethod (
-    ID INTEGER PRIMARY KEY,
+    PaymentID INTEGER PRIMARY KEY,
     name text
 );
 
@@ -37,41 +34,28 @@ INSERT INTO PaymentMethod VALUES (1,"Creditcard");
 INSERT INTO PaymentMethod VALUES (2,"Invoice");
 
 
-
-CREATE TABLE Membership (
-    ID INTEGER,
-    JoinDate text,
-    EndDate text,
-    TierType INTEGER,
-    MembershipStatus INTEGER,
-    PRIMARY KEY (ID),
-    FOREIGN KEY (ID)
-        REFERENCES Customer (pNr),
-    FOREIGN KEY (TierType)
-        REFERENCES Tier (ID),
-    FOREIGN KEY (MembershipStatus)
-        REFERENCES MembershipStatus (ID)
-);
-
-CREATE TABLE Tier (
-    ID INTEGER,
+CREATE TABLE MembershipTier (
+    TierID INTEGER,
     name text,
-    PRIMARY KEY (ID)
+    PRIMARY KEY (TierID)
 );
 
-INSERT INTO Tier VALUES (1,"Bronze");
-INSERT INTO Tier VALUES (2,"Silver");
-INSERT INTO Tier VALUES (3,"Gold");
+INSERT INTO MembershipTier VALUES (1,"Bronze");
+INSERT INTO MembershipTier VALUES (2,"Silver");
+INSERT INTO MembershipTier VALUES (3,"Gold");
 
 CREATE TABLE MembershipStatus (
-    ID INTEGER,
-    name text,
-    PRIMARY KEY (ID)
+    Pnr INTEGER,
+    TierID text,
+    StartDate text,
+    EndDate text,
+    PRIMARY KEY (Pnr),
+    FOREIGN KEY (Pnr)
+        REFERENCES Members (Pnr),
+    FOREIGN KEY (TierID)
+        REFERENCES MembershipTier (TierID)
 );
 
-INSERT INTO MembershipStatus VALUES (1,"Active");
-INSERT INTO MembershipStatus VALUES (2,"Paused");
-INSERT INTO MembershipStatus VALUES (3,"Canceled");
 
 
 CREATE TABLE Staff(
