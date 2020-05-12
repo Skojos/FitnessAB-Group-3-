@@ -107,8 +107,10 @@ public class CustomerPortal {
 	          System.out.println("1 - Book a class"); //Done
 	          System.out.println("2 - Delete a Booking");//Done
 	          System.out.println("3 - My Bookings");//Done
-	          System.out.println("4 - Change Contact information");
+	          System.out.println("4 - Change phonenumber");//Done
+	          System.out.println("5 - Change Email: ");//Done
 	          System.out.println("0 - Sign out");//Done
+	   
 	          
 	          
 	          customerMenu = Integer.parseInt(reader.readLine());
@@ -119,8 +121,14 @@ public class CustomerPortal {
 	          case 1:
 	        	  ClassPtEnrollmentSubsystem.BookClass(pNr);
 	        	  break;
-	          
+	          case 4:
+	        	  MembershipSubSystem.cPhone(pNr);
+	        	  break;
 	        
+	          case 5: 
+	        	  MembershipSubSystem.cEmail(pNr);
+	        	  break;
+	        	  
 	          case 3:
 	        	  ClassPtEnrollmentSubsystem.Boookings(pNr);
 	        	  break;

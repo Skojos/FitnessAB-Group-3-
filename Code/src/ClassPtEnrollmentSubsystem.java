@@ -372,7 +372,7 @@ public class ClassPtEnrollmentSubsystem {
 	      String sql;
 	      int pnr = pNr;
 	      int id = 0;
-	      int capacity = 0;
+	      
 	     
 	    
 		
@@ -401,7 +401,7 @@ public class ClassPtEnrollmentSubsystem {
               
               
               
-              sql =  "SELECT classSchedule.ClassScheduleID,Class.name AS Class, Room.RoomID, Facility.Name AS Facility,"
+              sql =  "SELECT ClassSchedule.Seats, classSchedule.ClassScheduleID,Class.name AS Class, Room.RoomID, Facility.Name AS Facility,"
               		+ "Instructor.Fnamn AS Instructor, ClassSchedule.Date,ClassSchedule.StartTime FROM ClassSchedule, Class, Room, Facility, Instructor "
               		+ "where ClassSchedule.ClassID = ? and ClassSchedule.ClassID = Class.ClassID and ClassSchedule.RoomID = Room.RoomID AND"
               		+ " Room.LocationID = Facility.LocationID AND ClassSchedule.InstructorID = Instructor.InstructorID and Facility.LocationID = ? and ClassSchedule.Seats >= 1";
@@ -795,9 +795,7 @@ public class ClassPtEnrollmentSubsystem {
 		
 	}
 	
-	public static void BookPt() {
-		
-	}
+
 	
 	
 }

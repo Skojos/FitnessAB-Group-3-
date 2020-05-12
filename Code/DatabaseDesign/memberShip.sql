@@ -22,7 +22,7 @@ CREATE TABLE CreditCardInformation (
     cvcCode INTEGER,
     PRIMARY KEY (Pnr),
     FOREIGN KEY (Pnr)
-        REFERENCES Customers (Pnr)
+        REFERENCES Members (Pnr)
 );
 
 CREATE TABLE PaymentMethod (
@@ -49,6 +49,7 @@ CREATE TABLE MembershipStatus (
     TierID text,
     StartDate text,
     EndDate text,
+    Status text,
     PRIMARY KEY (Pnr),
     FOREIGN KEY (Pnr)
         REFERENCES Members (Pnr),

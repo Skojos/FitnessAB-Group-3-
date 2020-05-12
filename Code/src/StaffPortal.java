@@ -19,6 +19,8 @@ public class StaffPortal {
 		
 		  Connection conn = null;
 	      PreparedStatement pstmt = null;
+	      int pnr = 0;
+	    		 
 	    
 		
 	      try {
@@ -102,18 +104,18 @@ public class StaffPortal {
 	          System.out.println();
 	          System.out.println("Membership management subsystem");
 	          System.out.println();//_______________________________
-	          System.out.println("1 - Register new customer");
+	          System.out.println("1 - Register new member"); //Done     
 	          System.out.println("2 - Update customer information");
-	          System.out.println("3 - Pause membership");
-	          System.out.println("4 - Activate membership");
-	          System.out.println("5 - Cancel a membership");
+	          System.out.println("3 - Pause membership");//Kanske tabort
+	          System.out.println("4 - Activate membership");//Done
+	          System.out.println("5 - Cancel a membership"); //Done
 	          System.out.println();
 	          System.out.println();
 	          System.out.println("Equipment management subsystem");
 	          System.out.println();
 	          System.out.println("6 - Add branch"); //Done
 	          System.out.println("7 - Add equiptment"); //Done
-	          System.out.println("8 - Delete equipment");//Done
+	          System.out.println("8 - Delete equipment");//Done//Lite oklart hur denna ska hanteras. 
 	          System.out.println();
 	          System.out.println();
 	          System.out.println("Class Subsystem");
@@ -121,7 +123,7 @@ public class StaffPortal {
 	          System.out.println("9  - Add new class");//Done
 	          System.out.println("10 - Add class to schedule");//Done
 	          System.out.println("11 - Delete class from schedule");//Done
-	          System.out.println("12 - Add new instructor");
+	          System.out.println("12 - Add new instructor");//Done
 	         
 	         
 	          System.out.println("");
@@ -146,6 +148,20 @@ public class StaffPortal {
 	          case 0:
 	        	  System.out.println("Signing out");
 	          break;
+	          
+	          case 4: 
+	        	  
+	        	  System.out.println("Enter personal number:");
+	        	  pnr = Integer.parseInt(reader.readLine());
+	        	  MembershipSubSystem.aMembership(pnr);
+	        	  break;
+	          
+	          case 5: 
+	        	  
+	        	  System.out.println("Enter personal number:");
+	        	  pnr = Integer.parseInt(reader.readLine());
+	        	  MembershipSubSystem.cMembership(pnr);
+	        	  break;
 	          
 	          case 6:
 	        	  GymEquipmentSubsystem.AddBranch();

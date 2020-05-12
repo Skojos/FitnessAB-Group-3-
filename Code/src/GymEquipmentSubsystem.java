@@ -253,7 +253,7 @@ public class GymEquipmentSubsystem {
               
               pstmt.executeUpdate();
 	    	  
-              System.out.println("Class un-booked");
+              System.out.println("Equipment deleted");
               
 	      } catch(SQLException e) {
 	    	  

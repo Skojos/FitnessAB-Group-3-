@@ -157,8 +157,9 @@ public class MembershipSubSystem {
         	
         	 
         	 String date = dtf.format(localDate);
+        	 String status = "Active";
 
-             sql = "INSERT INTO MembershipStatus VALUES (?,?,?,?)";
+             sql = "INSERT INTO MembershipStatus VALUES (?,?,?,?,?)";
 
              
              pstmt = conn.prepareStatement(sql);                
@@ -168,6 +169,7 @@ public class MembershipSubSystem {
              pstmt.setInt(2, tier);
              pstmt.setString(3, date);
              pstmt.setString(4, null);
+             pstmt.setString(5, status);
              pstmt.executeUpdate();
 
 
@@ -188,5 +190,279 @@ public class MembershipSubSystem {
 	}
 	
 	
+	public static void cPhone(int pNr) throws IOException {
+		
+		
+		
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DRIVER = "org.sqlite.JDBC"; 
+		
+		
+		  Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql = "";
+	      int pnr = pNr;
+		
+	      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+		
+		 try {
+	          Class.forName(DRIVER);
+	          SQLiteConfig config = new SQLiteConfig();  
+	          config.enforceForeignKeys(true); 
+	          conn = DriverManager.getConnection(DB_URL,config.toProperties());  
+	       
+	          
+	       } catch (Exception e) {
+	          System.out.println( e.toString() );
+	          System.exit(0);
+	       }
+	      
+	      
+	      
+	      
+	      try {
+             
+	    	
+	    	  
+	    	  System.out.println("Enter new value:");
+	    	  int value = Integer.parseInt(reader.readLine());             
+	    	
+             
+             
+             sql = "UPDATE Members SET PhoneNumber = ? WHERE Pnr = ?";
+          		 
+             
+             pstmt = conn.prepareStatement(sql); 
+             pstmt.setInt(1, value);
+             pstmt.setInt(2, pnr);
+             
+             
+             
+          
+             pstmt.executeUpdate();
+             
+             System.out.println("Information updated");
+             
+             
+             
+          conn.close();
+          
+          }
+          catch(SQLException e) {
+          
+       	   System.out.println( e.toString() );
+             
+          }
+		
+		
+		
+		
+	}
 	
+
+
+	public static void cEmail(int pNr) throws IOException {
+
+		
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DRIVER = "org.sqlite.JDBC"; 
+		
+		
+		  Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql = "";
+	      int pnr = pNr;
+		
+	      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+		
+		 try {
+	          Class.forName(DRIVER);
+	          SQLiteConfig config = new SQLiteConfig();  
+	          config.enforceForeignKeys(true); 
+	          conn = DriverManager.getConnection(DB_URL,config.toProperties());  
+	       
+	          
+	       } catch (Exception e) {
+	          System.out.println( e.toString() );
+	          System.exit(0);
+	       }
+	      
+	      
+	      
+	      
+	      try {
+             
+	    	
+	    	  
+	    	  System.out.println("Enter new value:");
+	    	  String value = reader.readLine();            
+	    	
+             
+             
+             sql = "UPDATE Members SET Email = ? WHERE Pnr = ?";
+          		 
+             
+             pstmt = conn.prepareStatement(sql); 
+             pstmt.setString(1, value);
+             pstmt.setInt(2, pnr);
+             
+             
+             
+          
+             pstmt.executeUpdate();
+             
+             System.out.println("Information updated");
+             
+             
+             
+          conn.close();
+          
+          }
+          catch(SQLException e) {
+          
+       	   System.out.println( e.toString() );
+             
+          }
+	}
+	
+	
+	
+
+	public static void pMembership() throws IOException { //Pause
+		
+	}
+	
+	public static void aMembership(int pNr) throws IOException  { //Activate
+		
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DRIVER = "org.sqlite.JDBC"; 
+		
+		
+		  Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql = "";
+	      
+	      int pnr = pNr;
+	      DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+     	 LocalDate localDate = LocalDate.now();
+     	
+     	 
+     	 String date = dtf.format(localDate);
+		
+	      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+		
+		 try {
+	          Class.forName(DRIVER);
+	          SQLiteConfig config = new SQLiteConfig();  
+	          config.enforceForeignKeys(true); 
+	          conn = DriverManager.getConnection(DB_URL,config.toProperties());  
+	       
+	          
+	       } catch (Exception e) {
+	          System.out.println( e.toString() );
+	          System.exit(0);
+	       }
+	      
+	      
+	      
+	      
+	      try {
+
+             sql = "UPDATE MembershipStatus SET StartDate = ?, Status = 'Active', EndDate = null WHERE Pnr = ?";
+          		 
+             
+             pstmt = conn.prepareStatement(sql); 
+             pstmt.setString(1, date);
+             pstmt.setInt(2, pnr);
+             
+             
+             
+          
+             pstmt.executeUpdate();
+             
+             System.out.println("Membership active");
+             
+             
+             
+          conn.close();
+          
+          }
+          catch(SQLException e) {
+          
+       	   System.out.println( e.toString() );
+             
+          }
+		
+	}
+	
+	public static void cMembership(int pNr) throws IOException { //Cancel
+		
+		
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DRIVER = "org.sqlite.JDBC"; 
+		
+		
+		  Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql = "";
+	      int pnr = pNr;
+		
+	      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+		
+		 try {
+	          Class.forName(DRIVER);
+	          SQLiteConfig config = new SQLiteConfig();  
+	          config.enforceForeignKeys(true); 
+	          conn = DriverManager.getConnection(DB_URL,config.toProperties());  
+	       
+	          
+	       } catch (Exception e) {
+	          System.out.println( e.toString() );
+	          System.exit(0);
+	       }
+	      
+	      
+	      
+	      
+	      try {
+             
+	    	
+	    	  
+	    	  System.out.println("Enter end date: ");
+	    	  String value = reader.readLine();            
+	    	
+             
+             
+             sql = "UPDATE MembershipStatus SET EndDate = ?, Status = 'Canceled' WHERE Pnr = ?";
+          		 
+             
+             pstmt = conn.prepareStatement(sql); 
+             pstmt.setString(1, value);
+             pstmt.setInt(2, pnr);
+             
+             
+             
+          
+             pstmt.executeUpdate();
+             
+             System.out.println("Information updated");
+             
+             
+             
+          conn.close();
+          
+          }
+          catch(SQLException e) {
+          
+       	   System.out.println( e.toString() );
+             
+          }
+	      
+	      
+		
+	}
+
+	
+
 }
+
