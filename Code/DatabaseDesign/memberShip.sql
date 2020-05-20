@@ -43,6 +43,7 @@ CREATE TABLE MembershipTier (
 INSERT INTO MembershipTier VALUES (1,"Bronze");
 INSERT INTO MembershipTier VALUES (2,"Silver");
 INSERT INTO MembershipTier VALUES (3,"Gold");
+INSERT INTO MembershipTier VALUES (4,"Trial");
 
 CREATE TABLE MembershipStatus (
     Pnr INTEGER,

@@ -1,8 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -25,6 +23,7 @@ public class MembershipSubSystem {
 		  Connection conn = null;
 	      PreparedStatement pstmt = null;
 	      String sql = "";
+	      
 		
 	      try {
 	          Class.forName(DRIVER);
@@ -62,13 +61,18 @@ public class MembershipSubSystem {
           System.out.println("Enter password: "); 
           String password = reader.readLine();
           
-          System.out.println("Choose tier. 1,2,3 "); 
+          System.out.println("Choose tier. 1.Bronze 2.Silver 3.Gold 4.Two weeks trial. "); 
           int tier = Integer.parseInt(reader.readLine());
           
+          int paymentMethod = 0; 
           
-          System.out.println("Choose payment method. 1,2"); 
-          int paymentMethod = Integer.parseInt(reader.readLine());
-
+          if (tier == 1 || tier == 2 || tier == 3) {
+          
+          System.out.println("Choose payment method. 1.Creditcard 2.Invoice"); 
+          paymentMethod = Integer.parseInt(reader.readLine());
+          
+          
+          } 
           
 	      
           try {
@@ -157,7 +161,14 @@ public class MembershipSubSystem {
         	
         	 
         	 String date = dtf.format(localDate);
+        	 String endDate = null;
         	 String status = "Active";
+        	 
+        	 if (tier == 4) {
+        		 LocalDate trialEnd = localDate.plusDays(14);
+        		 endDate = dtf.format(trialEnd);
+        		 
+        	 }
 
              sql = "INSERT INTO MembershipStatus VALUES (?,?,?,?,?)";
 
@@ -168,7 +179,7 @@ public class MembershipSubSystem {
              pstmt.setInt(1, pNr);
              pstmt.setInt(2, tier);
              pstmt.setString(3, date);
-             pstmt.setString(4, null);
+             pstmt.setString(4, endDate);
              pstmt.setString(5, status);
              pstmt.executeUpdate();
 
@@ -349,7 +360,7 @@ public class MembershipSubSystem {
      	 
      	 String date = dtf.format(localDate);
 		
-	      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+	    
 		
 		 try {
 	          Class.forName(DRIVER);
@@ -463,6 +474,70 @@ public class MembershipSubSystem {
 	}
 
 	
+	public static void cMemberShipTier(int pNr) throws IOException {
+		
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DRIVER = "org.sqlite.JDBC"; 
+		
+		
+		  Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql = "";
+	      int pnr = pNr;
+		
+	      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+		
+		 try {
+	          Class.forName(DRIVER);
+	          SQLiteConfig config = new SQLiteConfig();  
+	          config.enforceForeignKeys(true); 
+	          conn = DriverManager.getConnection(DB_URL,config.toProperties());  
+	       
+	          
+	       } catch (Exception e) {
+	          System.out.println( e.toString() );
+	          System.exit(0);
+	       }
+	      
+	      
+	      
+	      
+	      try {
+             
+	    	
+	    	  
+	    	  System.out.println("Choose tier. 1,2,3");
+	    	  int tierId = Integer.parseInt(reader.readLine());             
+	    	
+             
+             
+             sql = "UPDATE MembershipStatus SET TierID = ? WHERE Pnr = ?";
+          		 
+             
+             pstmt = conn.prepareStatement(sql); 
+             
+             pstmt.setInt(1, tierId);
+             pstmt.setInt(2, pnr);
+             
+             
+             
+          
+             pstmt.executeUpdate();
+             
+             System.out.println("Information updated");
+             
+             
+             
+          conn.close();
+          
+          }
+          catch(SQLException e) {
+          
+       	   System.out.println( e.toString() );
+             
+          }
+		
+	}
 
 }
 

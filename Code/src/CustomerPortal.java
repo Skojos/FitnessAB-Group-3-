@@ -2,7 +2,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.io.*;
 import org.sqlite.SQLiteConfig;
@@ -109,6 +108,7 @@ public class CustomerPortal {
 	          System.out.println("3 - My Bookings");//Done
 	          System.out.println("4 - Change phonenumber");//Done
 	          System.out.println("5 - Change Email: ");//Done
+	          System.out.println("6 - Change tier ");//Done
 	          System.out.println("0 - Sign out");//Done
 	   
 	          
@@ -127,6 +127,9 @@ public class CustomerPortal {
 	        
 	          case 5: 
 	        	  MembershipSubSystem.cEmail(pNr);
+	        	  break;
+	          case 6:
+	        	  MembershipSubSystem.cMemberShipTier(pNr);
 	        	  break;
 	        	  
 	          case 3:

@@ -3,7 +3,6 @@ EquipmentID INTEGER,
 LocationID INTEGER,
 BranchID INTEGER,
 Name text,
-Quantity INTEGER,
 PRIMARY KEY (EquipmentID),
 FOREIGN KEY (LocationID)
     REFERENCES Facility (LocationID),

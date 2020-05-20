@@ -22,6 +22,16 @@ INSERT INTO Class VALUES (2, "Spinning");
 INSERT INTO Class VALUES (3, "Body pump");
 
 
+CREATE TABLE ClassInstructor(
+    ClassID INTEGER,
+    InstructorID INTEGER,
+    PRIMARY KEY (ClassID,InstructorID),
+    FOREIGN KEY (ClassID)
+        REFERENCES Class (ClassID),
+    FOREIGN KEY (InstructorID)
+        REFERENCES Instructor (InstructorID)
+);
+
 
 
 
@@ -32,6 +42,8 @@ RoomID INTEGER,
 InstructorID INTEGER,
 Date text,
 StartTime text,
+EndTime text,
+SeatsLeft INTEGER,
 Seats INTEGER,
 PRIMARY KEY (ClassScheduleID),
 FOREIGN KEY (RoomID)
@@ -51,10 +63,9 @@ Name text,
 PRIMARY KEY (LocationID)
 );
 
-INSERT INTO Facility VALUES (1, "Vasa");
-INSERT INTO Facility VALUES (2, "Majorna");
-INSERT INTO Facility VALUES (3, "Lindholmen");
-INSERT INTO Facility VALUES (4, "Eriksberg");
+INSERT INTO Facility VALUES (1, "Majorna");
+INSERT INTO Facility VALUES (2, "Lindholmen");
+INSERT INTO Facility VALUES (3, "Eriksberg");
 
 
 
@@ -69,15 +80,14 @@ FOREIGN KEY (LocationID)
     REFERENCES Facility (LocationID)
 );
 
-INSERT INTO Room VALUES (1001, 1, 1);
+INSERT INTO Room VALUES (1001, 1, 15);
+INSERT INTO Room VALUES (1002, 1, 25);
 INSERT INTO Room VALUES (2001, 2, 50);
 INSERT INTO Room VALUES (2002, 2, 150);
 INSERT INTO Room VALUES (3001, 3, 50);
 INSERT INTO Room VALUES (3002, 3, 35);
 INSERT INTO Room VALUES (3003, 3, 100);
-INSERT INTO Room VALUES (4001, 4, 50);
-INSERT INTO Room VALUES (4002, 4, 20);
-INSERT INTO Room VALUES (4003, 4, 30);
+
 
 
 
@@ -89,7 +99,9 @@ Enamn text,
 PRIMARY KEY (InstructorID)
 );
 
-INSERT INTO Instructor VALUES (1, "Martin", "Eriksson");
+INSERT INTO Instructor VALUES (901212, "Martin", "Eriksson");
+INSERT INTO Instructor VALUES (601212, "Katarina", "Ek");
+INSERT INTO Instructor VALUES (891212, "Jenny", "Andersson");
 
 
 

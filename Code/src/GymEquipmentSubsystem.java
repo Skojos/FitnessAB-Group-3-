@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -108,9 +107,7 @@ public class GymEquipmentSubsystem {
         
         System.out.println("Enter name "); 
         String name = reader.readLine();
-        
-        System.out.println("Enter quantity: "); 
-        int quantity = Integer.parseInt(reader.readLine());
+
         
         
         
@@ -118,7 +115,7 @@ public class GymEquipmentSubsystem {
         
         try {
             
-            sql = "INSERT INTO Equipment (LocationID,BranchID,Name,Quantity) VALUES (?,?,?,?)";
+            sql = "INSERT INTO Equipment (LocationID,BranchID,Name) VALUES (?,?,?)";
 
             pstmt = conn.prepareStatement(sql);                
             
@@ -126,7 +123,6 @@ public class GymEquipmentSubsystem {
             pstmt.setInt(1, locationID);
             pstmt.setInt(2, branchID);
             pstmt.setString(3, name);
-            pstmt.setInt(4, quantity);
            
            
       

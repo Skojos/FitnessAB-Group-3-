@@ -81,6 +81,68 @@ public class ClassPtEnrollmentSubsystem {
 	}
 	
 	
+	public static void AssignInstructor() throws IOException {
+		
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DRIVER = "org.sqlite.JDBC";   
+
+		
+		  Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql;
+	    
+		
+	      try {
+	          Class.forName(DRIVER);
+	          SQLiteConfig config = new SQLiteConfig();  
+	          config.enforceForeignKeys(true); 
+	          conn = DriverManager.getConnection(DB_URL,config.toProperties());  
+	       
+	          
+	       } catch (Exception e) {
+	          System.out.println( e.toString() );
+	          System.exit(0);
+	       }
+	      
+	      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+		
+	    System.out.println("Enter Class ID"); 
+	    int classId = Integer.parseInt(reader.readLine());	      
+	      
+		System.out.println("Enter instructor ID: "); 
+        int instructorId = Integer.parseInt(reader.readLine());
+        
+       
+        
+       
+        
+       
+        
+        try {
+            
+            sql = "INSERT INTO ClassInstructor VALUES (?,?)";
+
+            pstmt = conn.prepareStatement(sql);                
+            
+               
+            pstmt.setInt(1, classId);
+            pstmt.setInt(2, instructorId);
+           
+            pstmt.executeUpdate();
+		
+        } catch(SQLException e){
+	        
+	        System.out.print("\033[H\033[2J"); 
+	        System.out.println(" ");
+	        System.out.println(e.toString());
+	        
+      
+   
+   }
+		
+		
+	}
+	
 	public static void AddClass() throws IOException {
 		
 		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
@@ -152,6 +214,8 @@ public class ClassPtEnrollmentSubsystem {
 	      PreparedStatement pstmt = null;
 	      String sql;
 	      int seats = 0;
+	      boolean check = true;
+	      int instructorId = 0;
 		
 	      try {
 	          Class.forName(DRIVER);
@@ -175,14 +239,56 @@ public class ClassPtEnrollmentSubsystem {
         System.out.println("Enter room ID"); 
         int roomId = Integer.parseInt(reader.readLine());
         
-        System.out.println("Enter instructor id");
-        int instructorId = Integer.parseInt(reader.readLine());
+        
         
         System.out.println("Enter date: "); 
         String date = reader.readLine();
         
-        System.out.println("Enter time: "); 
-        String time = reader.readLine();
+        System.out.println("Enter start time: "); 
+        String startTime = reader.readLine();
+        
+        System.out.println("Enter end time: "); 
+        String endTime = reader.readLine();
+        
+        while (check) {
+        	
+        	System.out.println("Enter instructor id");
+            instructorId = Integer.parseInt(reader.readLine());
+        	
+        //Kolla så att instructor gör valt pass. 
+        try {
+            
+            sql = "Select * from ClassInstructor where ClassID = ? and InstructorID = ? ";
+
+            pstmt = conn.prepareStatement(sql);                
+               
+            pstmt.setInt(1, classId);
+            pstmt.setInt(2, instructorId);
+
+            
+            ResultSet rs = pstmt.executeQuery();
+           
+            if(rs.next() == false) {
+            	System.out.println("Choosen instructor is not instructor for choosen class. Choose another instructor");
+            	
+            } else {
+            	check = false;
+            	continue;
+            }
+            
+           
+	
+        } catch(SQLException e){
+	        
+	        System.out.print("\033[H\033[2J"); 
+	        System.out.println(" ");
+	        System.out.println(e.toString());
+	        
+      
+   
+        }
+        
+        }
         
         
         try {
@@ -213,7 +319,7 @@ public class ClassPtEnrollmentSubsystem {
         
         try {
             
-            sql = "INSERT INTO ClassSchedule (ClassID,RoomID,InstructorID,Date,StartTime,Seats) VALUES (?,?,?,?,?,?)";
+            sql = "INSERT INTO ClassSchedule (ClassID,RoomID,InstructorID,Date,StartTime,EndTime,SeatsLeft,Seats) VALUES (?,?,?,?,?,?,?,?)";
 
             pstmt = conn.prepareStatement(sql);                
             
@@ -222,8 +328,10 @@ public class ClassPtEnrollmentSubsystem {
             pstmt.setInt(2, roomId);
             pstmt.setInt(3, instructorId);
             pstmt.setString(4, date);
-            pstmt.setString(5, time);
-            pstmt.setInt(6, seats);
+            pstmt.setString(5, startTime);
+            pstmt.setString(6, endTime);
+            pstmt.setInt(7, seats);
+            pstmt.setInt(8, seats);
            
             
             
@@ -401,10 +509,10 @@ public class ClassPtEnrollmentSubsystem {
               
               
               
-              sql =  "SELECT ClassSchedule.Seats, classSchedule.ClassScheduleID,Class.name AS Class, Room.RoomID, Facility.Name AS Facility,"
+              sql =  "SELECT ClassSchedule.SeatsLeft, classSchedule.ClassScheduleID,Class.name AS Class, Room.RoomID, Facility.Name AS Facility,"
               		+ "Instructor.Fnamn AS Instructor, ClassSchedule.Date,ClassSchedule.StartTime FROM ClassSchedule, Class, Room, Facility, Instructor "
               		+ "where ClassSchedule.ClassID = ? and ClassSchedule.ClassID = Class.ClassID and ClassSchedule.RoomID = Room.RoomID AND"
-              		+ " Room.LocationID = Facility.LocationID AND ClassSchedule.InstructorID = Instructor.InstructorID and Facility.LocationID = ? and ClassSchedule.Seats >= 1";
+              		+ " Room.LocationID = Facility.LocationID AND ClassSchedule.InstructorID = Instructor.InstructorID and Facility.LocationID = ? and ClassSchedule.SeatsLeft >= 1";
 
             		  
             		 
@@ -545,7 +653,7 @@ public class ClassPtEnrollmentSubsystem {
 	     
 	      
 	      try {
-	    	  sql = "UPDATE ClassSchedule SET Seats = Seats -1 where ClassScheduleID = ?";
+	    	  sql = "UPDATE ClassSchedule SET SeatsLeft = SeatsLeft -1 where ClassScheduleID = ?";
 	    	  
 	    	  pstmt = conn.prepareStatement(sql); 
               
@@ -594,7 +702,7 @@ public class ClassPtEnrollmentSubsystem {
 	      try {
               
               sql = "SELECT Class.name AS Class, Room.RoomID, Facility.Name AS Facility,"
-        		+ "Instructor.Fnamn AS Instructor, ClassSchedule.Date,ClassSchedule.StartTime FROM ClassSchedule, ClassEnrollment, Class, Room, Facility, Instructor "
+        		+ "Instructor.Fnamn AS Instructor, ClassSchedule.Date,ClassSchedule.StartTime,ClassSchedule.EndTime FROM ClassSchedule, ClassEnrollment, Class, Room, Facility, Instructor "
         		+ "where ClassEnrollment.Pnr = ? and ClassSchedule.ClassScheduleID = ClassEnrollment.ClassScheduleID and ClassSchedule.ClassID = Class.ClassID and ClassSchedule.RoomID = Room.RoomID AND"
         		+ " Room.LocationID = Facility.LocationID AND ClassSchedule.InstructorID = Instructor.InstructorID";
         	
@@ -759,7 +867,7 @@ public class ClassPtEnrollmentSubsystem {
 	     
 	      
 	      try {
-	    	  sql = "UPDATE ClassSchedule SET Seats = Seats +1 where ClassScheduleID = ?";
+	    	  sql = "UPDATE ClassSchedule SET SeatsLeft = SeatsLeft +1 where ClassScheduleID = ?";
 	    	  
 	    	  pstmt = conn.prepareStatement(sql); 
               
@@ -796,6 +904,7 @@ public class ClassPtEnrollmentSubsystem {
 	}
 	
 
+	
 	
 	
 }
