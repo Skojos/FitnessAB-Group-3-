@@ -30,6 +30,7 @@ CREATE TABLE PaymentMethod (
     name text
 );
 
+INSERT INTO PaymentMethod VALUES (0,"Trial");
 INSERT INTO PaymentMethod VALUES (1,"Creditcard");
 INSERT INTO PaymentMethod VALUES (2,"Invoice");
 
