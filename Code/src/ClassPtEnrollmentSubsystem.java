@@ -404,69 +404,7 @@ public class ClassPtEnrollmentSubsystem {
 	      }
 	}
 	
-	public static void AddPt() throws IOException { 
-		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
-		final String DRIVER = "org.sqlite.JDBC";   
 
-		
-		  Connection conn = null;
-	      PreparedStatement pstmt = null;
-	      String sql;
-	    
-		
-	      try {
-	          Class.forName(DRIVER);
-	          SQLiteConfig config = new SQLiteConfig();  
-	          config.enforceForeignKeys(true); 
-	          conn = DriverManager.getConnection(DB_URL,config.toProperties());  
-	       
-	          
-	       } catch (Exception e) {
-	          System.out.println( e.toString() );
-	          System.exit(0);
-	       }
-	      
-	      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
-		
-		System.out.println("Enter Pt ID: "); 
-        int id = Integer.parseInt(reader.readLine());
-        
-        System.out.println("Enter first name: "); 
-        String Fname = reader.readLine();
-        
-        System.out.println("Enter last name"); 
-        String Lname = reader.readLine();
-        
-       
-        
-        try {
-            
-            sql = "INSERT INTO PersonalTrainers VALUES (?,?,?)";
-
-            pstmt = conn.prepareStatement(sql);                
-            
-               
-            pstmt.setInt(1, id);
-            pstmt.setString(2, Fname);
-            pstmt.setString(3, Lname);
-           
-      
-    
-            pstmt.executeUpdate();
-		
-        } catch(SQLException e){
-	        
-	        System.out.print("\033[H\033[2J"); 
-	        System.out.println(" ");
-	        System.out.println(e.toString());
-	        
-      
-   
-   }
-		
-		
-	}
 	
 	public static void BookClass(int pNr) throws IOException{
 		
