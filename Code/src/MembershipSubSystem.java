@@ -42,7 +42,7 @@ public class MembershipSubSystem {
 	      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
 	      
 	      System.out.println("Enter p-number: "); 
-          int pNr = Integer.parseInt(reader.readLine());
+          long pNr = Long.parseLong(reader.readLine());
           
           System.out.println("Enter Firstname"); 
           String fName = reader.readLine();
@@ -85,7 +85,7 @@ public class MembershipSubSystem {
               pstmt = conn.prepareStatement(sql);                
               
                  
-              pstmt.setInt(1, pNr);
+              pstmt.setLong(1, pNr);
               pstmt.setString(2, fName);
               pstmt.setString(3, lName);
               pstmt.setInt(4, phone);
@@ -132,7 +132,7 @@ public class MembershipSubSystem {
                   pstmt = conn.prepareStatement(sql);                
                   
                      
-                  pstmt.setInt(1, pNr);
+                  pstmt.setLong(1, pNr);
                   pstmt.setString(2, cFname);
                   pstmt.setString(3, cLname);
                   pstmt.setString(4, cardNumber);
@@ -176,7 +176,7 @@ public class MembershipSubSystem {
              pstmt = conn.prepareStatement(sql);                
              
                 
-             pstmt.setInt(1, pNr);
+             pstmt.setLong(1, pNr);
              pstmt.setInt(2, tier);
              pstmt.setString(3, date);
              pstmt.setString(4, endDate);
