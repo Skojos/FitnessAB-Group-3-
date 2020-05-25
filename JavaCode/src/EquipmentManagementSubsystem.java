@@ -15,7 +15,7 @@ public class EquipmentManagementSubsystem {
 	
 	public static void AddBranch() throws IOException {
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC";   
 
 		
@@ -75,7 +75,7 @@ public class EquipmentManagementSubsystem {
 	
 	public static void AddEquipment() throws  IOException {
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC";   
 
 		
@@ -144,7 +144,7 @@ public class EquipmentManagementSubsystem {
 	
 	public static void DeleteEquipment() throws IOException {
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC";   
 
 		

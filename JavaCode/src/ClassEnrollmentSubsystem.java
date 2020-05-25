@@ -206,7 +206,7 @@ public class ClassEnrollmentSubsystem {
 	public static void ClassSchedule() throws IOException {
 
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC";   
 
 		
@@ -357,7 +357,7 @@ public class ClassEnrollmentSubsystem {
 	
 	public static void RemoveClassSchedule() throws IOException {
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC";   
 
 		
@@ -409,7 +409,7 @@ public class ClassEnrollmentSubsystem {
 	public static void BookClass(long pNr) throws IOException{
 		
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC";   
 
 		
@@ -643,7 +643,7 @@ public class ClassEnrollmentSubsystem {
 	
 	public static void Boookings(long pNr) throws IOException {
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC";   
 
 		
@@ -739,7 +739,7 @@ public class ClassEnrollmentSubsystem {
 	
 	public static void DeleteBooking(long pNr) throws IOException {
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC";   
 
 		

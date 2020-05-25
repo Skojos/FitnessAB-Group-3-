@@ -13,7 +13,7 @@ public class StaffPortal {
 	public static void StaffSignIn() throws IOException {
 		
 		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
-		   // Namnet på den driver som används av java för att prata med SQLite
+		  
 		   final String DRIVER = "org.sqlite.JDBC";   
 
 		
@@ -26,12 +26,12 @@ public class StaffPortal {
 	      try {
 	          Class.forName(DRIVER);
 	          SQLiteConfig config = new SQLiteConfig();  
-	          config.enforceForeignKeys(true); // Denna kodrad ser till att sätta databasen i ett läge där den ger felmeddelande ifall man bryter mot någon främmande-nyckel-regel
+	          config.enforceForeignKeys(true); 
 	          conn = DriverManager.getConnection(DB_URL,config.toProperties());  
 	       
 	          
 	       } catch (Exception e) {
-	          // Om java-progammet inte lyckas koppla upp sig mot databasen (t ex om fel sökväg eller om driver inte hittas) så kommer ett felmeddelande skrivas ut
+	          
 	          System.out.println( e.toString() );
 	          System.exit(0);
 	       }
