@@ -15,5 +15,5 @@ FOREIGN KEY (BranchID)
 CREATE TABLE Branch (
 BranchID INTEGER,
 Name text,
-PRIMARY KEY (BranchID)
+PRIMARY KEY (BranchID,Name)
 );

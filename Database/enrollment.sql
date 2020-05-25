@@ -14,7 +14,7 @@ FOREIGN KEY (ClassScheduleID)
 CREATE TABLE Class (
 ClassID INTEGER,
 Name text,
-PRIMARY KEY (ClassID)
+PRIMARY KEY (ClassID, Name)
 );
 
 INSERT INTO Class VALUES (1, "Yoga");

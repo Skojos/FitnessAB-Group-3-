@@ -205,7 +205,7 @@ public class MembershipSubSystem {
 		
 		
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC"; 
 		
 		
@@ -253,7 +253,7 @@ public class MembershipSubSystem {
 		    	  
 	    	  } else {
 	    		  
-	    		  System.out.println("Enter new email:");
+	    		  System.out.println("Enter new value:");
 		    	  String value = reader.readLine();
 		    	  
 		    	  sql = "UPDATE Members SET " + change + " " + "= ? WHERE Pnr = ?";
@@ -301,7 +301,7 @@ public class MembershipSubSystem {
 	public static void cPassword(long pNr, String password) throws IOException {
 
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC"; 
 		
 		
@@ -373,7 +373,7 @@ public class MembershipSubSystem {
 	
 	public static void cPasswordStaff(long pNr) throws IOException {
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC"; 
 		
 		
@@ -435,7 +435,7 @@ public class MembershipSubSystem {
 	
 	public static void aMembership(long pNr) throws IOException  { //Activate
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC"; 
 		
 		
@@ -499,7 +499,7 @@ public class MembershipSubSystem {
 	public static void cMembership(long pNr) throws IOException { //Cancel
 		
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC"; 
 		
 		
@@ -566,7 +566,7 @@ public class MembershipSubSystem {
 	
 	public static void cMemberShipTier(long pNr) throws IOException {
 		
-		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Code/DatabaseDesign/fitnessAB.db";  
+		final String DB_URL = "jdbc:sqlite://Users/jonasskoog/Documents/GitHub/FitnessAB-Group-3-/Database/fitnessAB.db";  
 		final String DRIVER = "org.sqlite.JDBC"; 
 		
 		
