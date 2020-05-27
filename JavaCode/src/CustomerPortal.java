@@ -112,9 +112,11 @@ public class CustomerPortal {
 	          
 	          System.out.println("Membership subsystem");
 	          System.out.println();
-	          System.out.println("4 - Account(My Details. ), Update information");//Done
+	          System.out.println("4 - Account(My Details), Update information");//Done
 	          System.out.println("5 - Account, Change password");//Done
 	          System.out.println("6 - Change tier ");//Done
+	          System.out.println("7 - Cancel membership");//Done
+	          
 	          
 	          
 	          System.out.println("0 - Sign out");//Done
@@ -138,6 +140,9 @@ public class CustomerPortal {
 	        	  break;
 	          case 6:
 	        	  MembershipSubSystem.cMemberShipTier(pNr);
+	        	  break;
+	          case 7:
+	        	  MembershipSubSystem.cMembership(pNr);
 	        	  break;
 	        	  
 	          case 3:

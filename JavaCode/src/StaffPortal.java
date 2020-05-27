@@ -109,14 +109,14 @@ public class StaffPortal {
 	          System.out.println("3 - Change member information, Password");
 	          System.out.println("4 - Activate membership");//Done
 	          System.out.println("5 - Cancel a membership"); //Done
-	          System.out.println("6 - Change members tier");
+	          System.out.println("6 - Change members tier");//Done
 	          System.out.println();
 	          System.out.println();
 	          System.out.println("Equipment management subsystem");
 	          System.out.println();
 	          System.out.println("7 - Add branch"); //Done
 	          System.out.println("8 - Add equiptment and assign to facility"); //Done
-	          System.out.println("9 - Delete equipment");//Done
+	          System.out.println("9 - Delete equipment and show equipment");//Done
 	          System.out.println();
 	          System.out.println();
 	          System.out.println("Class enrollment Subsystem");
