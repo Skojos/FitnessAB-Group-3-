@@ -1,0 +1,112 @@
+@charset "utf-8";
+
+#formular {
+width: 600px;
+border: 5px solid rgba(234,234,234,1.00);
+border-radius: 10px;
+background-color: rgba(225,225,225,1.00);
+padding: 20px;
+font-size: 16px;
+}
+
+#formular input[type=text],
+#formular input[type=email] {
+width: 100%;
+padding: 10px 5px 10px 10px;
+margin: 5px 0 15px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+font-size: 18px;
+}
+
+#formular input[type=submit] {
+width: 100%;
+background-color: rgba(42,90,157,1.00);
+color: rgba(255,255,255,1.00);
+padding: 15px 20px;
+margin: 10px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 18px;
+}
+
+#formular input[type=submit]:hover {
+background-color: rgba(101,151,222,1.00);
+}
+
+/* MOBILTELEFON och SMARTPHONE (portrait/stående) */
+@media only screen and (max-width: 768px){
+#formular {
+width: 90%;
+}
+}
+body {
+    margin: 0 auto;
+    background-color: lightgrey;
+    max-width: 1024px;
+    font-size: 120%;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: black;
+}
+
+header {
+    background-color: white;
+    font-size: 100%;
+    text-align: left;
+    padding: 8px;
+}
+header a {
+    color: white;
+    text-decoration: none;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+nav ul li {float: left;}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav ul li a:hover:not(.active) {background-color:  #d5dbdb;}
+
+@media screen and (max-width: 600px){
+    nav ul li {float: none;}
+}
+main {
+    background-color:   #b3b6b7;
+    padding: 10px;
+    color: white;
+}
+footer {
+    background-color: black;
+    color: white;
+    font-size: 80%;
+    text-align: center;
+    padding: 4px;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h4, header {
+font-weight: 700;
+}
