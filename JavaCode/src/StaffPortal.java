@@ -105,8 +105,8 @@ public class StaffPortal {
 	          System.out.println("Membership management subsystem");
 	          System.out.println();//_______________________________
 	          System.out.println("1 - Register new member"); //Done     
-	          System.out.println("2 - Change information about member");
-	          System.out.println("3 - Change member information, Password");
+	          System.out.println("2 - Change information about member");//Done
+	          System.out.println("3 - Change member information, Password");//Done
 	          System.out.println("4 - Activate membership");//Done
 	          System.out.println("5 - Cancel a membership"); //Done
 	          System.out.println("6 - Change members tier");//Done
